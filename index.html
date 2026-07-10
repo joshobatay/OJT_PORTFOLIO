@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gabriel Josh A. Obatay | OJT Portfolio</title>
-    <!-- Modern Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS for sleek styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { font-family: 'Inter', sans-serif; }
@@ -16,7 +14,6 @@
 
     <div class="max-w-5xl mx-auto px-6 py-16 md:py-24">
 
-        <!-- 1. HEADER SECTION -->
         <header class="mb-16 text-center md:text-left border-b border-gray-200 pb-10">
             <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
                 Hi, I'm Gabriel Josh A. Obatay
@@ -26,15 +23,11 @@
             </p>
         </header>
 
-        <!-- 2. ABOUT ME SECTION (With 1x1 Picture) -->
         <section class="mb-20 bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-10 flex flex-col md:flex-row items-center md:items-start gap-8">
-            <!-- 1x1 Formal Picture Slot -->
             <div class="w-40 h-40 shrink-0 rounded-lg overflow-hidden border border-gray-200 shadow-sm">
-                <!-- IMAGE SOURCE -->
                 <img src="files/my-formal-photo.png" alt="Gabriel Josh A. Obatay" class="w-full h-full object-cover">
             </div>
             
-            <!-- Short Description -->
             <div>
                 <h2 class="text-2xl font-bold text-gray-900 mb-4">About Me</h2>
                 <p class="text-gray-600 leading-relaxed text-lg">
@@ -43,14 +36,11 @@
             </div>
         </section>
 
-        <!-- 3. DOCUMENTS / BUTTONS SECTION -->
         <section>
             <h2 class="text-2xl font-bold text-gray-900 mb-8">OJT Documents & Reports</h2>
             
-            <!-- Grid for Buttons -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
                 
-                <!-- PDF FILES -->
                 <a href="files/GABRIEL_JOSH_OBATAY_RESUME.pdf" target="_blank" class="flex items-center justify-center bg-white border border-gray-200 hover:border-blue-500 hover:text-blue-600 hover:shadow-md transition-all rounded-xl py-4 px-6 text-sm font-semibold text-gray-700">Resume</a>
                 
                 <a href="https://www.tp.com/en-ph/locations/philippines/" target="_blank" class="flex items-center justify-center bg-white border border-gray-200 hover:border-blue-500 hover:text-blue-600 hover:shadow-md transition-all rounded-xl py-4 px-6 text-sm font-semibold text-gray-700">Company Profile</a>
@@ -65,25 +55,71 @@
                 
                 <a href="files/Insurance.pdf" target="_blank" class="flex items-center justify-center bg-white border border-gray-200 hover:border-blue-500 hover:text-blue-600 hover:shadow-md transition-all rounded-xl py-4 px-6 text-sm font-semibold text-gray-700">Insurance</a>
                 
-                <a href="files/Daily_Attendance_Sheet.pdf" target="_blank" class="flex items-center justify-center bg-white border border-gray-200 hover:border-blue-500 hover:text-blue-600 hover:shadow-md transition-all rounded-xl py-4 px-6 text-sm font-semibold text-gray-700">Daily Attendance Sheet</a>
-                
+                <div class="flex flex-col gap-2">
+                    <button onclick="toggleDropdown('attendance-menu', 'attendance-icon')" class="flex items-center justify-between bg-white border border-gray-200 hover:border-blue-500 hover:text-blue-600 hover:shadow-md transition-all rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 w-full focus:outline-none">
+                        <span>Daily Attendance Sheet</span>
+                        <svg id="attendance-icon" class="w-4 h-4 transition-transform duration-200 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="attendance-menu" class="hidden grid grid-cols-4 gap-2 bg-gray-50 p-2 rounded-xl border border-gray-200">
+                        <a href="files/attendance_w1.pdf" target="_blank" class="text-center bg-white border border-gray-200 hover:bg-blue-50 hover:text-blue-600 rounded-lg py-2 text-xs font-semibold text-gray-600 transition-colors shadow-sm">W1</a>
+                        <a href="files/attendance_w2.pdf" target="_blank" class="text-center bg-white border border-gray-200 hover:bg-blue-50 hover:text-blue-600 rounded-lg py-2 text-xs font-semibold text-gray-600 transition-colors shadow-sm">W2</a>
+                        <a href="files/attendance_w3.pdf" target="_blank" class="text-center bg-white border border-gray-200 hover:bg-blue-50 hover:text-blue-600 rounded-lg py-2 text-xs font-semibold text-gray-600 transition-colors shadow-sm">W3</a>
+                        <a href="files/attendance_w4.pdf" target="_blank" class="text-center bg-white border border-gray-200 hover:bg-blue-50 hover:text-blue-600 rounded-lg py-2 text-xs font-semibold text-gray-600 transition-colors shadow-sm">W4</a>
+                        <a href="files/attendance_w5.pdf" target="_blank" class="text-center bg-white border border-gray-200 hover:bg-blue-50 hover:text-blue-600 rounded-lg py-2 text-xs font-semibold text-gray-600 transition-colors shadow-sm">W5</a>
+                        <a href="files/attendance_w6.pdf" target="_blank" class="text-center bg-white border border-gray-200 hover:bg-blue-50 hover:text-blue-600 rounded-lg py-2 text-xs font-semibold text-gray-600 transition-colors shadow-sm">W6</a>
+                        <a href="files/attendance_w7.pdf" target="_blank" class="text-center bg-white border border-gray-200 hover:bg-blue-50 hover:text-blue-600 rounded-lg py-2 text-xs font-semibold text-gray-600 transition-colors shadow-sm">W7</a>
+                        <a href="files/attendance_w8.pdf" target="_blank" class="text-center bg-white border border-gray-200 hover:bg-blue-50 hover:text-blue-600 rounded-lg py-2 text-xs font-semibold text-gray-600 transition-colors shadow-sm">W8</a>
+                    </div>
+                </div>
+
                 <a href="files/Teleperformance_Notarized_MOA.pdf" target="_blank" class="flex items-center justify-center bg-white border border-gray-200 hover:border-blue-500 hover:text-blue-600 hover:shadow-md transition-all rounded-xl py-4 px-6 text-sm font-semibold text-gray-700">Memorandum of Agreement</a>
                 
                 <a href="files/OBATAY_Internship Agreement.pdf" target="_blank" class="flex items-center justify-center bg-white border border-gray-200 hover:border-blue-500 hover:text-blue-600 hover:shadow-md transition-all rounded-xl py-4 px-6 text-sm font-semibold text-gray-700">Internship Agreement</a>
                 
                 <a href="files/Medical_Certificate.pdf" target="_blank" class="flex items-center justify-center bg-white border border-gray-200 hover:border-blue-500 hover:text-blue-600 hover:shadow-md transition-all rounded-xl py-4 px-6 text-sm font-semibold text-gray-700">Medical Certificate</a>
-                
-                <a href="files/Weekly_Reports.pdf" target="_blank" class="flex items-center justify-center bg-white border border-gray-200 hover:border-blue-500 hover:text-blue-600 hover:shadow-md transition-all rounded-xl py-4 px-6 text-sm font-semibold text-gray-700">Weekly Reports</a>
-                
+
+                <div class="flex flex-col gap-2">
+                    <button onclick="toggleDropdown('reports-menu', 'reports-icon')" class="flex items-center justify-between bg-white border border-gray-200 hover:border-blue-500 hover:text-blue-600 hover:shadow-md transition-all rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 w-full focus:outline-none">
+                        <span>Weekly Reports</span>
+                        <svg id="reports-icon" class="w-4 h-4 transition-transform duration-200 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="reports-menu" class="hidden grid grid-cols-4 gap-2 bg-gray-50 p-2 rounded-xl border border-gray-200">
+                        <a href="files/report_w1.pdf" target="_blank" class="text-center bg-white border border-gray-200 hover:bg-blue-50 hover:text-blue-600 rounded-lg py-2 text-xs font-semibold text-gray-600 transition-colors shadow-sm">W1</a>
+                        <a href="files/report_w2.pdf" target="_blank" class="text-center bg-white border border-gray-200 hover:bg-blue-50 hover:text-blue-600 rounded-lg py-2 text-xs font-semibold text-gray-600 transition-colors shadow-sm">W2</a>
+                        <a href="files/report_w3.pdf" target="_blank" class="text-center bg-white border border-gray-200 hover:bg-blue-50 hover:text-blue-600 rounded-lg py-2 text-xs font-semibold text-gray-600 transition-colors shadow-sm">W3</a>
+                        <a href="files/report_w4.pdf" target="_blank" class="text-center bg-white border border-gray-200 hover:bg-blue-50 hover:text-blue-600 rounded-lg py-2 text-xs font-semibold text-gray-600 transition-colors shadow-sm">W4</a>
+                        <a href="files/report_w5.pdf" target="_blank" class="text-center bg-white border border-gray-200 hover:bg-blue-50 hover:text-blue-600 rounded-lg py-2 text-xs font-semibold text-gray-600 transition-colors shadow-sm">W5</a>
+                        <a href="files/report_w6.pdf" target="_blank" class="text-center bg-white border border-gray-200 hover:bg-blue-50 hover:text-blue-600 rounded-lg py-2 text-xs font-semibold text-gray-600 transition-colors shadow-sm">W6</a>
+                        <a href="files/report_w7.pdf" target="_blank" class="text-center bg-white border border-gray-200 hover:bg-blue-50 hover:text-blue-600 rounded-lg py-2 text-xs font-semibold text-gray-600 transition-colors shadow-sm">W7</a>
+                        <a href="files/report_w8.pdf" target="_blank" class="text-center bg-white border border-gray-200 hover:bg-blue-50 hover:text-blue-600 rounded-lg py-2 text-xs font-semibold text-gray-600 transition-colors shadow-sm">W8</a>
+                    </div>
+                </div>
+
                 <a href="files/Certificate_of_Completion.pdf" target="_blank" class="flex items-center justify-center bg-white border border-gray-200 hover:border-blue-500 hover:text-blue-600 hover:shadow-md transition-all rounded-xl py-4 px-6 text-sm font-semibold text-gray-700">Certificate of Completion</a>
 
-                <!-- IMAGE FILE (PNG/JPG) -->
                 <a href="files/Photo_Documentation.jpg" target="_blank" class="flex items-center justify-center bg-blue-50 border border-blue-200 hover:bg-blue-500 hover:text-white hover:shadow-md transition-all rounded-xl py-4 px-6 text-sm font-semibold text-blue-700">📸 Photo Documentation</a>
 
             </div>
         </section>
 
     </div>
+
+    <script>
+        function toggleDropdown(menuId, iconId) {
+            const menu = document.getElementById(menuId);
+            const icon = document.getElementById(iconId);
+            
+            // Toggle the 'hidden' class to show/hide the weeks grid
+            menu.classList.toggle('hidden');
+            
+            // Rotate the dropdown arrow based on visibility
+            if (menu.classList.contains('hidden')) {
+                icon.classList.remove('rotate-180');
+            } else {
+                icon.classList.add('rotate-180');
+            }
+        }
+    </script>
 
 </body>
 </html>
