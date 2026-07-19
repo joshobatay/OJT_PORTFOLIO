@@ -34,38 +34,129 @@
                 transform: translateY(0);
             }
         }
+
+        /* Custom Typewriter Cursor Blink */
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Scroll Reveal Utility Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- LIQUID LIVE WALLPAPER CSS --- */
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background-color: #f8fafc; /* Light mode base */
+            overflow: hidden;
+            transition: background-color 0.7s ease;
+        }
+        html.dark .liquid-bg {
+            background-color: #09090b; /* Dark mode base */
+        }
+        
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px); /* Creates the liquid merge effect */
+            animation: fluidMotion 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.6;
+            transition: background-color 0.7s ease;
+        }
+        html.dark .blob {
+            opacity: 0.4; /* Slightly darker blobs in dark mode to keep text readable */
+        }
+
+        /* Blob 1: Top Left */
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #93c5fd; animation-delay: 0s; }
+        html.dark .blob-1 { background: #3730a3; } 
+        
+        /* Blob 2: Bottom Right */
+        .blob-2 { bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: #c084fc; animation-delay: -5s; }
+        html.dark .blob-2 { background: #4c1d95; }
+        
+        /* Blob 3: Center Left */
+        .blob-3 { top: 20%; left: 20%; width: 45vw; height: 45vw; background: #67e8f9; animation-delay: -10s; }
+        html.dark .blob-3 { background: #1e3a8a; }
+
+        @keyframes fluidMotion {
+            0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+            33% { transform: translate(15vw, 10vh) scale(1.1) rotate(5deg); }
+            66% { transform: translate(-10vw, 15vh) scale(0.9) rotate(-5deg); }
+            100% { transform: translate(5vw, -15vh) scale(1.05) rotate(2deg); }
+        }
     </style>
 </head>
-<body class="text-gray-800 dark:text-zinc-300 antialiased selection:bg-blue-200 dark:selection:bg-indigo-500/30 selection:text-blue-900 dark:selection:text-indigo-200 transition-colors duration-300 relative min-h-screen">
+<body class="text-gray-800 dark:text-zinc-300 antialiased selection:bg-blue-200 dark:selection:bg-indigo-500/30 selection:text-blue-900 dark:selection:text-indigo-200 transition-colors duration-300 relative min-h-screen overflow-x-hidden">
 
-    <!-- SCHEMATIC GRID BACKGROUND -->
-    <div class="fixed inset-0 z-[-1] bg-gray-50 dark:bg-zinc-950 transition-colors duration-500">
-        <!-- The Grid -->
-        <div class="absolute inset-0 bg-[linear-gradient(to_right,#8080801a_1px,transparent_1px),linear-gradient(to_bottom,#8080801a_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-        <!-- Soft center glow to keep text readable -->
-        <div class="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-blue-500 dark:bg-indigo-500 opacity-20 blur-[100px]"></div>
+    <!-- LIQUID LIVE WALLPAPER -->
+    <div class="liquid-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
     </div>
 
-    <div class="max-w-5xl mx-auto px-6 py-16 md:py-24 relative">
+    <!-- THEME TOGGLE BUTTON -->
+    <button id="theme-toggle" class="fixed top-6 right-6 p-2.5 rounded-full bg-white/80 dark:bg-zinc-800/80 backdrop-blur-md border border-gray-200/50 dark:border-zinc-700/50 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all focus:outline-none z-50">
+        <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-indigo-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+    </button>
 
-        <!-- Theme Toggle Button -->
-        <button id="theme-toggle" class="absolute top-6 right-6 p-2.5 rounded-full bg-white/80 dark:bg-zinc-800/80 backdrop-blur-md border border-gray-200/50 dark:border-zinc-700/50 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all focus:outline-none z-50">
-            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-indigo-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-        </button>
+    <!-- IN-PAGE PDF VIEWER MODAL -->
+    <div id="pdf-modal" class="fixed inset-0 z-[110] hidden flex items-center justify-center">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-gray-900/60 dark:bg-black/80 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+        <!-- Modal Content -->
+        <div id="pdf-modal-content" class="bg-white dark:bg-zinc-900 w-11/12 md:w-4/5 max-w-5xl h-[85vh] rounded-2xl shadow-2xl z-10 flex flex-col overflow-hidden transform scale-95 opacity-0 transition-all duration-300 border border-gray-200/50 dark:border-zinc-700/50">
+            <!-- Header -->
+            <div class="flex justify-between items-center p-4 border-b border-gray-200 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-900/50">
+                <h3 class="font-bold text-gray-800 dark:text-white" id="modal-title">Document Viewer</h3>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-red-500 transition-colors focus:outline-none bg-gray-200 dark:bg-zinc-800 p-1.5 rounded-full">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <!-- Body (Iframe) -->
+            <div class="flex-grow w-full h-full bg-gray-100 dark:bg-zinc-950 relative">
+                <!-- Loading indicator behind iframe -->
+                <div class="absolute inset-0 flex items-center justify-center -z-10">
+                    <span class="text-gray-400 dark:text-zinc-600 font-semibold animate-pulse">Loading Document...</span>
+                </div>
+                <iframe id="pdf-iframe" class="w-full h-full z-10 relative" src="" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="max-w-5xl mx-auto px-6 py-16 md:py-24 relative overflow-hidden">
 
         <!-- 1. HEADER SECTION -->
-        <header class="mb-16 text-center md:text-left border-b border-gray-200/50 dark:border-zinc-800/50 pb-10 fade-in-up">
+        <header class="mb-16 text-center md:text-left border-b border-gray-200/50 dark:border-zinc-800/50 pb-10 fade-in-up mt-8 md:mt-0">
             <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500 dark:from-indigo-400 dark:to-cyan-400 pb-1">
                 Hi, I'm Gabriel Josh A. Obatay
             </h1>
-            <p class="text-xl md:text-2xl text-gray-600 dark:text-zinc-400 font-light transition-colors duration-300">
-                a 2nd-year Computer Engineering student of the Polytechnic University of the Philippines - Sta. Mesa
+            <!-- Typewriter Target -->
+            <p class="text-xl md:text-2xl text-gray-600 dark:text-zinc-400 font-light transition-colors duration-300 min-h-[3rem]">
+                <span id="typewriter-text"></span><span class="cursor-blink text-blue-600 dark:text-indigo-400 font-bold">|</span>
             </p>
         </header>
 
         <!-- 2. ABOUT ME SECTION -->
-        <section class="mb-20 bg-white/70 dark:bg-zinc-900/60 backdrop-blur-xl rounded-2xl shadow-xl shadow-blue-900/5 dark:shadow-black/20 border border-white/50 dark:border-zinc-700/50 p-8 md:p-10 flex flex-col md:flex-row items-center md:items-start gap-8 transition-colors duration-300 relative overflow-hidden fade-in-up delay-100">
+        <section id="about" class="mb-20 bg-white/70 dark:bg-zinc-900/60 backdrop-blur-xl rounded-2xl shadow-xl shadow-blue-900/5 dark:shadow-black/20 border border-white/50 dark:border-zinc-700/50 p-8 md:p-10 flex flex-col md:flex-row items-center md:items-start gap-8 transition-colors duration-300 relative overflow-hidden reveal">
             
             <div class="w-40 h-40 shrink-0 rounded-2xl overflow-hidden shadow-lg p-1 bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-indigo-500 dark:to-cyan-500">
                 <img src="files/my-formal-photo.png" alt="Gabriel Josh A. Obatay" class="w-full h-full object-cover rounded-xl border-2 border-white dark:border-zinc-900">
@@ -80,30 +171,32 @@
         </section>
 
         <!-- 3. DOCUMENTS / BUTTONS SECTION -->
-        <section class="fade-in-up delay-200">
+        <section id="documents" class="reveal">
             <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center md:text-left transition-colors duration-300">OJT Documents & Reports</h2>
             
             <div class="flex flex-wrap justify-center md:justify-start gap-4 items-start">
                 
-                <a href="files/GABRIEL_JOSH_OBATAY_RESUME.pdf" target="_blank" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300">Resume</a>
+                <!-- Notice all standard files are now <button> tags that call openModal() -->
+                <button onclick="openModal('files/GABRIEL_JOSH_OBATAY_RESUME.pdf', 'Resume')" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Resume</button>
                 
-                <a href="https://www.tp.com/en-ph/locations/philippines/" target="_blank" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300">Company Profile</a>
+                <!-- Kept Company Profile as external link because corporate sites often block iframe embedding -->
+                <a href="https://www.tp.com/en-ph/locations/philippines/" target="_blank" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300">Company Profile ↗</a>
                 
-                <a href="files/OBATAY_Recommendation Letter.pdf" target="_blank" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300">Letter of Endorsement</a>
+                <button onclick="openModal('files/OBATAY_Recommendation Letter.pdf', 'Letter of Endorsement')" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Letter of Endorsement</button>
                 
-                <a href="files/LetterOfIntent.pdf" target="_blank" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300">Letter of Intent</a>
+                <button onclick="openModal('files/LetterOfIntent.pdf', 'Letter of Intent')" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Letter of Intent</button>
                 
-                <a href="files/OBATAY_Parent's Consent.pdf" target="_blank" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300">Parent's Consent</a>
+                <button onclick="openModal('files/OBATAY_Parent\'s Consent.pdf', 'Parent\'s Consent')" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Parent's Consent</button>
                 
-                <a href="files/OJT-Job-Description.pdf" target="_blank" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300">Company Job Description</a>
+                <button onclick="openModal('files/OJT-Job-Description.pdf', 'Company Job Description')" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Company Job Description</button>
                 
-                <a href="files/Insurance.pdf" target="_blank" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300">Insurance</a>
+                <button onclick="openModal('files/Insurance.pdf', 'Insurance')" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Insurance</button>
                 
-                <a href="files/Teleperformance_Notarized_MOA.pdf" target="_blank" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300">Memorandum of Agreement</a>
+                <button onclick="openModal('files/Teleperformance_Notarized_MOA.pdf', 'Memorandum of Agreement')" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Memorandum of Agreement</button>
                 
-                <a href="files/OBATAY_Internship Agreement.pdf" target="_blank" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300">Internship Agreement</a>
+                <button onclick="openModal('files/OBATAY_Internship Agreement.pdf', 'Internship Agreement')" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Internship Agreement</button>
                 
-                <a href="files/Medical_Certificate.pdf" target="_blank" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300">Medical Certificate</a>
+                <button onclick="openModal('files/Medical_Certificate.pdf', 'Medical Certificate')" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Medical Certificate</button>
 
                 <!-- DROPDOWN: Weekly Reports -->
                 <div class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex flex-col gap-2">
@@ -112,18 +205,18 @@
                     </button>
                     <!-- Sub-menu Weeks 1-8 -->
                     <div id="reports-menu" class="hidden grid grid-cols-2 gap-2 bg-white/50 dark:bg-zinc-950/50 backdrop-blur-md p-2 rounded-xl border border-gray-200/50 dark:border-zinc-800/50 transition-colors duration-300 shadow-inner">
-                        <a href="files/Obatay - Weekly Report (week 1).pdf" target="_blank" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm">Week 1</a>
-                        <a href="files/Obatay - Weekly Report (week 2).pdf" target="_blank" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm">Week 2</a>
-                        <a href="files/Obatay - Weekly Report (week 3).pdf" target="_blank" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm">Week 3</a>
-                        <a href="files/Obatay - Weekly Report (week 4).pdf" target="_blank" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm">Week 4</a>
-                        <a href="files/Obatay - Weekly Report (week 5).pdf" target="_blank" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm">Week 5</a>
-                        <a href="files/Obatay - Weekly Report (week 6).pdf" target="_blank" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm">Week 6</a>
-                        <a href="files/Obatay - Weekly Report (week 7).pdf" target="_blank" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm">Week 7</a>
-                        <a href="files/Obatay - Weekly Report (week 8).pdf" target="_blank" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm">Week 8</a>
+                        <button onclick="openModal('files/Obatay - Weekly Report (week 1).pdf', 'Weekly Report - Week 1')" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 1</button>
+                        <button onclick="openModal('files/Obatay - Weekly Report (week 2).pdf', 'Weekly Report - Week 2')" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 2</button>
+                        <button onclick="openModal('files/Obatay - Weekly Report (week 3).pdf', 'Weekly Report - Week 3')" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 3</button>
+                        <button onclick="openModal('files/Obatay - Weekly Report (week 4).pdf', 'Weekly Report - Week 4')" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 4</button>
+                        <button onclick="openModal('files/Obatay - Weekly Report (week 5).pdf', 'Weekly Report - Week 5')" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 5</button>
+                        <button onclick="openModal('files/Obatay - Weekly Report (week 6).pdf', 'Weekly Report - Week 6')" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 6</button>
+                        <button onclick="openModal('files/Obatay - Weekly Report (week 7).pdf', 'Weekly Report - Week 7')" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 7</button>
+                        <button onclick="openModal('files/Obatay - Weekly Report (week 8).pdf', 'Weekly Report - Week 8')" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 8</button>
                     </div>
                 </div>
 
-                <a href="files/Certificate_of_Completion.pdf" target="_blank" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300">Certificate of Completion</a>
+                <button onclick="openModal('files/Certificate_of_Completion.pdf', 'Certificate of Completion')" class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Certificate of Completion</button>
 
                 <!-- DROPDOWN: Photo Documentation -->
                 <div class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex flex-col gap-2">
@@ -132,14 +225,14 @@
                     </button>
                     <!-- Sub-menu Weeks 1-8 -->
                     <div id="photo-menu" class="hidden grid grid-cols-2 gap-2 bg-white/50 dark:bg-zinc-950/50 backdrop-blur-md p-2 rounded-xl border border-gray-200/50 dark:border-zinc-800/50 transition-colors duration-300 shadow-inner">
-                        <a href="files/Obatay - Weekly Photo Documentation Report (week 1).pdf" target="_blank" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm">Week 1</a>
-                        <a href="files/Obatay - Weekly Photo Documentation Report (week 2).pdf" target="_blank" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm">Week 2</a>
-                        <a href="files/Obatay - Weekly Photo Documentation Report (week 3).pdf" target="_blank" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm">Week 3</a>
-                        <a href="files/Obatay - Weekly Photo Documentation Report (week 4).pdf" target="_blank" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm">Week 4</a>
-                        <a href="files/Obatay - Weekly Photo Documentation Report (week 5).pdf" target="_blank" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm">Week 5</a>
-                        <a href="files/Obatay - Weekly Photo Documentation Report (week 6).pdf" target="_blank" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm">Week 6</a>
-                        <a href="files/Obatay - Weekly Photo Documentation Report (week 7).pdf" target="_blank" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm">Week 7</a>
-                        <a href="files/Obatay - Weekly Photo Documentation Report (week 8).pdf" target="_blank" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm">Week 8</a>
+                        <button onclick="openModal('files/Obatay - Weekly Photo Documentation Report (week 1).pdf', 'Photo Documentation - Week 1')" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 1</button>
+                        <button onclick="openModal('files/Obatay - Weekly Photo Documentation Report (week 2).pdf', 'Photo Documentation - Week 2')" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 2</button>
+                        <button onclick="openModal('files/Obatay - Weekly Photo Documentation Report (week 3).pdf', 'Photo Documentation - Week 3')" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 3</button>
+                        <button onclick="openModal('files/Obatay - Weekly Photo Documentation Report (week 4).pdf', 'Photo Documentation - Week 4')" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 4</button>
+                        <button onclick="openModal('files/Obatay - Weekly Photo Documentation Report (week 5).pdf', 'Photo Documentation - Week 5')" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 5</button>
+                        <button onclick="openModal('files/Obatay - Weekly Photo Documentation Report (week 6).pdf', 'Photo Documentation - Week 6')" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 6</button>
+                        <button onclick="openModal('files/Obatay - Weekly Photo Documentation Report (week 7).pdf', 'Photo Documentation - Week 7')" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 7</button>
+                        <button onclick="openModal('files/Obatay - Weekly Photo Documentation Report (week 8).pdf', 'Photo Documentation - Week 8')" class="text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 8</button>
                     </div>
                 </div>
 
@@ -150,6 +243,71 @@
 
     <!-- Scripts -->
     <script>
+        // --- PDF MODAL LOGIC ---
+        function openModal(fileUrl, title) {
+            const modal = document.getElementById('pdf-modal');
+            const iframe = document.getElementById('pdf-iframe');
+            const modalTitle = document.getElementById('modal-title');
+            const content = document.getElementById('pdf-modal-content');
+
+            iframe.src = fileUrl;
+            modalTitle.innerText = title;
+
+            // Show modal background
+            modal.classList.remove('hidden');
+            
+            // Delay to allow block to apply before animating opacity/scale
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('pdf-modal');
+            const iframe = document.getElementById('pdf-iframe');
+            const content = document.getElementById('pdf-modal-content');
+
+            // Animate out
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            
+            // Wait for animation to finish before hiding and clearing
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                iframe.src = ""; 
+            }, 300);
+        }
+
+        // --- TYPEWRITER EFFECT ---
+        const typeTarget = document.getElementById('typewriter-text');
+        const textToType = "a 2nd-year college student of the Polytechnic University of the Philippines - Sta. Mesa | BSCPE 2-6";
+        let index = 0;
+
+        function typeWriter() {
+            if (index < textToType.length) {
+                typeTarget.innerHTML += textToType.charAt(index);
+                index++;
+                setTimeout(typeWriter, 35); 
+            }
+        }
+        setTimeout(typeWriter, 400);
+
+        // --- SCROLL REVEAL ANIMATIONS ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, { 
+            threshold: 0.1, 
+            rootMargin: "0px 0px -50px 0px" 
+        });
+        revealElements.forEach(el => revealObserver.observe(el));
+
         // --- DROPDOWN LOGIC ---
         function toggleDropdown(menuId) {
             const menu = document.getElementById(menuId);
