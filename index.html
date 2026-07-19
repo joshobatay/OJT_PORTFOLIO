@@ -137,7 +137,6 @@
     <div id="pdf-modal" class="fixed inset-0 z-[110] hidden flex items-center justify-center">
         <div class="absolute inset-0 bg-gray-900/60 dark:bg-black/80 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
         <div id="pdf-modal-content" class="bg-white dark:bg-zinc-900 w-11/12 md:w-4/5 max-w-5xl h-[85vh] rounded-2xl shadow-2xl z-10 flex flex-col overflow-hidden transform scale-95 opacity-0 transition-all duration-300 border border-gray-200/50 dark:border-zinc-700/50">
-            <!-- Modal Header with new "Open in New Tab" button -->
             <div class="flex justify-between items-center p-4 border-b border-gray-200 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-900/50">
                 <h3 class="font-bold text-gray-800 dark:text-white truncate pr-4" id="modal-title">Document Viewer</h3>
                 <div class="flex items-center gap-2">
@@ -150,7 +149,6 @@
                     </button>
                 </div>
             </div>
-            <!-- Added -webkit-overflow-scrolling to help iOS rendering if they do manage to open the modal -->
             <div class="flex-grow w-full h-full bg-gray-100 dark:bg-zinc-950 relative overflow-auto" style="-webkit-overflow-scrolling: touch;">
                 <div class="absolute inset-0 flex items-center justify-center -z-10">
                     <span class="text-gray-400 dark:text-zinc-600 font-semibold animate-pulse">Loading Document...</span>
@@ -229,13 +227,16 @@
                 
                 <button onclick="openResponsiveModal('files/GABRIEL_JOSH_OBATAY_RESUME.pdf', 'Resume')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Resume</button>
                 
-                <a href="https://www.tp.com/en-ph/locations/philippines/" target="_blank" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300">Company Profile ↗</a>
+                <a href="https://www.tp.com/en-ph/locations/philippines/" target="_blank" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300">Company Profile</a>
                 
                 <button onclick="openResponsiveModal('files/OBATAY_Recommendation Letter.pdf', 'Letter of Endorsement')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Letter of Endorsement</button>
                 
                 <button onclick="openResponsiveModal('files/LetterOfIntent.pdf', 'Letter of Intent')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Letter of Intent</button>
                 
                 <button onclick="openResponsiveModal('files/OBATAY_Parent\'s Consent.pdf', 'Parent\'s Consent')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Parent's Consent</button>
+
+                <!-- NEW: Student Waiver Button -->
+                <button onclick="openResponsiveModal('files/OBATAY_Student waiver.pdf', 'Student Waiver')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Student Waiver</button>
                 
                 <button onclick="openResponsiveModal('files/OJT-Job-Description.pdf', 'Company Job Description')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Company Job Description</button>
                 
@@ -252,6 +253,7 @@
                     <button onclick="toggleDropdown('reports-menu')" class="btn-ripple relative overflow-hidden flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 w-full focus:outline-none">
                         <span>Weekly Reports</span>
                     </button>
+                    <!-- Sub-menu Weeks 1-8 -->
                     <div id="reports-menu" class="hidden grid grid-cols-2 gap-2 bg-white/50 dark:bg-zinc-950/50 backdrop-blur-md p-2 rounded-xl border border-gray-200/50 dark:border-zinc-800/50 transition-colors duration-300 shadow-inner">
                         <button onclick="openResponsiveModal('files/Obatay - Weekly Report (week 1).pdf', 'Weekly Report - Week 1')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 1</button>
                         <button onclick="openResponsiveModal('files/Obatay - Weekly Report (week 2).pdf', 'Weekly Report - Week 2')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 2</button>
@@ -412,13 +414,20 @@
 
         // --- SMART RESPONSIVE PDF MODAL LOGIC ---
         function openResponsiveModal(fileUrl, title) {
-            // If it's a mobile device (screen width < 768px), open directly in a new tab to trigger native OS PDF reader
             if (window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                window.open(fileUrl, '_blank');
+                
+                const absoluteUrl = new URL(fileUrl, window.location.href).href;
+                
+                if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:") {
+                    window.open(fileUrl, '_blank');
+                    alert("Note: In-browser PDF preview on mobile requires the website to be hosted online (like GitHub Pages). Falling back to default raw file.");
+                } else {
+                    const viewerUrl = 'https://docs.google.com/gview?embedded=true&url=' + encodeURIComponent(absoluteUrl);
+                    window.open(viewerUrl, '_blank');
+                }
                 return;
             }
 
-            // Otherwise, it's a PC/Tablet, open the sleek in-page modal
             const modal = document.getElementById('pdf-modal');
             const iframe = document.getElementById('pdf-iframe');
             const modalTitle = document.getElementById('modal-title');
@@ -427,7 +436,7 @@
 
             iframe.src = fileUrl;
             modalTitle.innerText = title;
-            externalLinkBtn.href = fileUrl; // Updates the "Open Fullscreen" button with current file
+            externalLinkBtn.href = fileUrl; 
 
             modal.classList.remove('hidden');
             setTimeout(() => {
