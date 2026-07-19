@@ -62,35 +62,32 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            background-color: #f8fafc; /* Light mode base */
+            background-color: #f8fafc; 
             overflow: hidden;
             transition: background-color 0.7s ease;
         }
         html.dark .liquid-bg {
-            background-color: #09090b; /* Dark mode base */
+            background-color: #09090b; 
         }
         
         .blob {
             position: absolute;
             border-radius: 50%;
-            filter: blur(90px); /* Creates the liquid merge effect */
+            filter: blur(90px); 
             animation: fluidMotion 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0.6;
             transition: background-color 0.7s ease;
         }
         html.dark .blob {
-            opacity: 0.4; /* Slightly darker blobs in dark mode to keep text readable */
+            opacity: 0.4; 
         }
 
-        /* Blob 1: Top Left */
         .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #93c5fd; animation-delay: 0s; }
         html.dark .blob-1 { background: #3730a3; } 
         
-        /* Blob 2: Bottom Right */
         .blob-2 { bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: #c084fc; animation-delay: -5s; }
         html.dark .blob-2 { background: #4c1d95; }
         
-        /* Blob 3: Center Left */
         .blob-3 { top: 20%; left: 20%; width: 45vw; height: 45vw; background: #67e8f9; animation-delay: -10s; }
         html.dark .blob-3 { background: #1e3a8a; }
 
@@ -107,11 +104,11 @@
             border-radius: 50%;
             transform: scale(0);
             animation: ripple-drop 0.6s linear forwards;
-            background-color: rgba(59, 130, 246, 0.3); /* Blue splash for light mode */
-            pointer-events: none; /* Ensures the ripple doesn't block the actual click */
+            background-color: rgba(59, 130, 246, 0.3); 
+            pointer-events: none; 
         }
         html.dark .ripple {
-            background-color: rgba(99, 102, 241, 0.4); /* Indigo splash for dark mode */
+            background-color: rgba(99, 102, 241, 0.4); 
         }
         @keyframes ripple-drop {
             to {
@@ -130,7 +127,7 @@
         <div class="blob blob-3"></div>
     </div>
 
-    <!-- THEME TOGGLE BUTTON (Properly Fixed to Top Right) -->
+    <!-- THEME TOGGLE BUTTON -->
     <button id="theme-toggle" class="btn-ripple fixed top-6 right-6 md:top-8 md:right-8 overflow-hidden p-2.5 rounded-full bg-white/80 dark:bg-zinc-800/80 backdrop-blur-md border border-gray-200/50 dark:border-zinc-700/50 shadow-sm hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:scale-90 transition-all focus:outline-none z-[100]">
         <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
         <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-indigo-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
@@ -138,20 +135,23 @@
 
     <!-- IN-PAGE PDF VIEWER MODAL -->
     <div id="pdf-modal" class="fixed inset-0 z-[110] hidden flex items-center justify-center">
-        <!-- Backdrop -->
         <div class="absolute inset-0 bg-gray-900/60 dark:bg-black/80 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
-        <!-- Modal Content -->
         <div id="pdf-modal-content" class="bg-white dark:bg-zinc-900 w-11/12 md:w-4/5 max-w-5xl h-[85vh] rounded-2xl shadow-2xl z-10 flex flex-col overflow-hidden transform scale-95 opacity-0 transition-all duration-300 border border-gray-200/50 dark:border-zinc-700/50">
-            <!-- Header -->
+            <!-- Modal Header with new "Open in New Tab" button -->
             <div class="flex justify-between items-center p-4 border-b border-gray-200 dark:border-zinc-800 bg-gray-50/50 dark:bg-zinc-900/50">
-                <h3 class="font-bold text-gray-800 dark:text-white" id="modal-title">Document Viewer</h3>
-                <button onclick="closeModal()" class="btn-ripple relative overflow-hidden text-gray-500 hover:text-red-500 transition-colors active:scale-90 focus:outline-none bg-gray-200 dark:bg-zinc-800 p-1.5 rounded-full">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
+                <h3 class="font-bold text-gray-800 dark:text-white truncate pr-4" id="modal-title">Document Viewer</h3>
+                <div class="flex items-center gap-2">
+                    <a id="modal-external-link" href="#" target="_blank" class="btn-ripple relative overflow-hidden flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-indigo-400 bg-blue-50 dark:bg-indigo-900/30 px-3 py-1.5 rounded-lg hover:bg-blue-100 dark:hover:bg-indigo-900/50 transition-colors">
+                        <span>Open Fullscreen</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    </a>
+                    <button onclick="closeModal()" class="btn-ripple relative overflow-hidden text-gray-500 hover:text-red-500 transition-colors active:scale-90 focus:outline-none bg-gray-200 dark:bg-zinc-800 p-1.5 rounded-full ml-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
             </div>
-            <!-- Body (Iframe) -->
-            <div class="flex-grow w-full h-full bg-gray-100 dark:bg-zinc-950 relative">
-                <!-- Loading indicator behind iframe -->
+            <!-- Added -webkit-overflow-scrolling to help iOS rendering if they do manage to open the modal -->
+            <div class="flex-grow w-full h-full bg-gray-100 dark:bg-zinc-950 relative overflow-auto" style="-webkit-overflow-scrolling: touch;">
                 <div class="absolute inset-0 flex items-center justify-center -z-10">
                     <span class="text-gray-400 dark:text-zinc-600 font-semibold animate-pulse">Loading Document...</span>
                 </div>
@@ -165,6 +165,18 @@
 
         <!-- 1. HEADER SECTION -->
         <header class="mb-16 text-center md:text-left border-b border-gray-200/50 dark:border-zinc-800/50 pb-10 fade-in-up mt-8 md:mt-0">
+            
+            <!-- DYNAMIC LIVE STATUS PILL -->
+            <div class="inline-flex items-center gap-3 bg-white/70 dark:bg-zinc-900/60 backdrop-blur-md border border-gray-200/50 dark:border-zinc-700/50 shadow-sm rounded-full px-4 py-2 mb-6">
+                <span class="relative flex h-3 w-3">
+                  <span id="status-ping" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span id="status-dot" class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                </span>
+                <span id="status-text" class="text-xs md:text-sm font-bold text-gray-700 dark:text-zinc-300">Status: Checking...</span>
+                <span class="text-gray-300 dark:text-zinc-600 font-bold">|</span>
+                <span id="live-clock" class="text-xs md:text-sm font-mono font-bold text-blue-600 dark:text-indigo-400">00:00:00 AM</span>
+            </div>
+
             <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500 dark:from-indigo-400 dark:to-cyan-400 pb-1">
                 Hi, I'm Gabriel Josh A. Obatay
             </h1>
@@ -174,20 +186,40 @@
             </p>
         </header>
 
-        <!-- 2. ABOUT ME SECTION -->
+        <!-- 2. ABOUT ME SECTION & PROGRESS BAR -->
         <section id="about" class="mb-20 bg-white/70 dark:bg-zinc-900/60 backdrop-blur-xl rounded-2xl shadow-xl shadow-blue-900/5 dark:shadow-black/20 border border-white/50 dark:border-zinc-700/50 p-8 md:p-10 flex flex-col md:flex-row items-center md:items-start gap-8 transition-colors duration-300 relative overflow-hidden reveal">
             
             <div class="w-40 h-40 shrink-0 rounded-2xl overflow-hidden shadow-lg p-1 bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-indigo-500 dark:to-cyan-500">
                 <img src="files/my-formal-photo.png" alt="Gabriel Josh A. Obatay" class="w-full h-full object-cover rounded-xl border-2 border-white dark:border-zinc-900">
             </div>
             
-            <div class="z-10">
+            <div class="z-10 w-full flex-grow">
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">About Me</h2>
-                <p class="text-gray-700 dark:text-zinc-300 leading-relaxed text-lg transition-colors duration-300">
+                <p class="text-gray-700 dark:text-zinc-300 leading-relaxed text-lg transition-colors duration-300 mb-6">
                     I am currently rendering my 300-hour On-the-Job Training at Teleperformance Molino. This portfolio serves as the official digital repository of my technical logs, internship requirements, and professional milestones as I gain practical experience in enterprise IT operations and desktop support.
                 </p>
+
+                <!-- 300 HOUR PROGRESS BAR -->
+                <div class="w-full bg-gray-50/50 dark:bg-zinc-950/50 rounded-xl p-5 border border-gray-200/80 dark:border-zinc-800/80 shadow-inner">
+                    <div class="flex justify-between items-end mb-3">
+                        <span class="text-sm font-bold text-gray-800 dark:text-white tracking-wide uppercase">OJT Completion</span>
+                        <span class="text-sm font-mono font-bold text-blue-600 dark:text-indigo-400"><span id="hours-counter">56</span> / 300 Hours</span>
+                    </div>
+                    <div class="w-full bg-gray-200 dark:bg-zinc-800 rounded-full h-4 overflow-hidden shadow-inner">
+                        <div id="progress-fill" class="bg-gradient-to-r from-blue-500 to-indigo-500 h-4 rounded-full w-0 transition-all duration-[1500ms] ease-out shadow-[0_0_15px_rgba(99,102,241,0.6)] relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-full bg-white/20" style="animation: shimmer 2s infinite linear; transform: skewX(-20deg);"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
+
+        <style>
+            @keyframes shimmer {
+                0% { transform: translateX(-150%) skewX(-20deg); }
+                100% { transform: translateX(150%) skewX(-20deg); }
+            }
+        </style>
 
         <!-- 3. DOCUMENTS / BUTTONS SECTION -->
         <section id="documents" class="reveal">
@@ -195,63 +227,59 @@
             
             <div class="flex flex-wrap justify-center md:justify-start gap-4 items-start">
                 
-                <!-- Notice all standard files are now <button> tags that call openModal() -->
-                <button onclick="openModal('files/GABRIEL_JOSH_OBATAY_RESUME.pdf', 'Resume')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Resume</button>
+                <button onclick="openResponsiveModal('files/GABRIEL_JOSH_OBATAY_RESUME.pdf', 'Resume')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Resume</button>
                 
-                <!-- Kept Company Profile as external link because corporate sites often block iframe embedding -->
                 <a href="https://www.tp.com/en-ph/locations/philippines/" target="_blank" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300">Company Profile ↗</a>
                 
-                <button onclick="openModal('files/OBATAY_Recommendation Letter.pdf', 'Letter of Endorsement')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Letter of Endorsement</button>
+                <button onclick="openResponsiveModal('files/OBATAY_Recommendation Letter.pdf', 'Letter of Endorsement')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Letter of Endorsement</button>
                 
-                <button onclick="openModal('files/LetterOfIntent.pdf', 'Letter of Intent')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Letter of Intent</button>
+                <button onclick="openResponsiveModal('files/LetterOfIntent.pdf', 'Letter of Intent')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Letter of Intent</button>
                 
-                <button onclick="openModal('files/OBATAY_Parent\'s Consent.pdf', 'Parent\'s Consent')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Parent's Consent</button>
+                <button onclick="openResponsiveModal('files/OBATAY_Parent\'s Consent.pdf', 'Parent\'s Consent')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Parent's Consent</button>
                 
-                <button onclick="openModal('files/OJT-Job-Description.pdf', 'Company Job Description')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Company Job Description</button>
+                <button onclick="openResponsiveModal('files/OJT-Job-Description.pdf', 'Company Job Description')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Company Job Description</button>
                 
-                <button onclick="openModal('files/Insurance.pdf', 'Insurance')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Insurance</button>
+                <button onclick="openResponsiveModal('files/Insurance.pdf', 'Insurance')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Insurance</button>
                 
-                <button onclick="openModal('files/Teleperformance_Notarized_MOA.pdf', 'Memorandum of Agreement')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Memorandum of Agreement</button>
+                <button onclick="openResponsiveModal('files/Teleperformance_Notarized_MOA.pdf', 'Memorandum of Agreement')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Memorandum of Agreement</button>
                 
-                <button onclick="openModal('files/OBATAY_Internship Agreement.pdf', 'Internship Agreement')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Internship Agreement</button>
+                <button onclick="openResponsiveModal('files/OBATAY_Internship Agreement.pdf', 'Internship Agreement')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Internship Agreement</button>
                 
-                <button onclick="openModal('files/Medical_Certificate.pdf', 'Medical Certificate')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Medical Certificate</button>
+                <button onclick="openResponsiveModal('files/Medical_Certificate.pdf', 'Medical Certificate')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Medical Certificate</button>
 
                 <!-- DROPDOWN: Weekly Reports -->
                 <div class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex flex-col gap-2">
                     <button onclick="toggleDropdown('reports-menu')" class="btn-ripple relative overflow-hidden flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 w-full focus:outline-none">
                         <span>Weekly Reports</span>
                     </button>
-                    <!-- Sub-menu Weeks 1-8 -->
                     <div id="reports-menu" class="hidden grid grid-cols-2 gap-2 bg-white/50 dark:bg-zinc-950/50 backdrop-blur-md p-2 rounded-xl border border-gray-200/50 dark:border-zinc-800/50 transition-colors duration-300 shadow-inner">
-                        <button onclick="openModal('files/Obatay - Weekly Report (week 1).pdf', 'Weekly Report - Week 1')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 1</button>
-                        <button onclick="openModal('files/Obatay - Weekly Report (week 2).pdf', 'Weekly Report - Week 2')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 2</button>
-                        <button onclick="openModal('files/Obatay - Weekly Report (week 3).pdf', 'Weekly Report - Week 3')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 3</button>
-                        <button onclick="openModal('files/Obatay - Weekly Report (week 4).pdf', 'Weekly Report - Week 4')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 4</button>
-                        <button onclick="openModal('files/Obatay - Weekly Report (week 5).pdf', 'Weekly Report - Week 5')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 5</button>
-                        <button onclick="openModal('files/Obatay - Weekly Report (week 6).pdf', 'Weekly Report - Week 6')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 6</button>
-                        <button onclick="openModal('files/Obatay - Weekly Report (week 7).pdf', 'Weekly Report - Week 7')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 7</button>
-                        <button onclick="openModal('files/Obatay - Weekly Report (week 8).pdf', 'Weekly Report - Week 8')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 8</button>
+                        <button onclick="openResponsiveModal('files/Obatay - Weekly Report (week 1).pdf', 'Weekly Report - Week 1')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 1</button>
+                        <button onclick="openResponsiveModal('files/Obatay - Weekly Report (week 2).pdf', 'Weekly Report - Week 2')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 2</button>
+                        <button onclick="openResponsiveModal('files/Obatay - Weekly Report (week 3).pdf', 'Weekly Report - Week 3')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 3</button>
+                        <button onclick="openResponsiveModal('files/Obatay - Weekly Report (week 4).pdf', 'Weekly Report - Week 4')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 4</button>
+                        <button onclick="openResponsiveModal('files/Obatay - Weekly Report (week 5).pdf', 'Weekly Report - Week 5')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 5</button>
+                        <button onclick="openResponsiveModal('files/Obatay - Weekly Report (week 6).pdf', 'Weekly Report - Week 6')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 6</button>
+                        <button onclick="openResponsiveModal('files/Obatay - Weekly Report (week 7).pdf', 'Weekly Report - Week 7')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 7</button>
+                        <button onclick="openResponsiveModal('files/Obatay - Weekly Report (week 8).pdf', 'Weekly Report - Week 8')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 8</button>
                     </div>
                 </div>
 
-                <button onclick="openModal('files/Certificate_of_Completion.pdf', 'Certificate of Completion')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Certificate of Completion</button>
+                <button onclick="openResponsiveModal('files/Certificate_of_Completion.pdf', 'Certificate of Completion')" class="btn-ripple relative overflow-hidden w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 focus:outline-none">Certificate of Completion</button>
 
                 <!-- DROPDOWN: Photo Documentation -->
                 <div class="w-full sm:w-[calc(50%-8px)] lg:w-[calc(33.33%-11px)] flex flex-col gap-2">
                     <button onclick="toggleDropdown('photo-menu')" class="btn-ripple relative overflow-hidden flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border border-gray-200/80 dark:border-zinc-700/80 hover:border-blue-400 dark:hover:border-indigo-400 hover:text-blue-600 dark:hover:text-indigo-300 hover:shadow-lg hover:shadow-blue-500/15 dark:hover:shadow-indigo-500/20 hover:-translate-y-1 active:translate-y-0 active:scale-[0.98] transition-all duration-300 rounded-xl py-4 px-6 text-sm font-semibold text-gray-700 dark:text-zinc-300 w-full focus:outline-none">
                         <span>Photo Documentation</span>
                     </button>
-                    <!-- Sub-menu Weeks 1-8 -->
                     <div id="photo-menu" class="hidden grid grid-cols-2 gap-2 bg-white/50 dark:bg-zinc-950/50 backdrop-blur-md p-2 rounded-xl border border-gray-200/50 dark:border-zinc-800/50 transition-colors duration-300 shadow-inner">
-                        <button onclick="openModal('files/Obatay - Weekly Photo Documentation Report (week 1).pdf', 'Photo Documentation - Week 1')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 1</button>
-                        <button onclick="openModal('files/Obatay - Weekly Photo Documentation Report (week 2).pdf', 'Photo Documentation - Week 2')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 2</button>
-                        <button onclick="openModal('files/Obatay - Weekly Photo Documentation Report (week 3).pdf', 'Photo Documentation - Week 3')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 3</button>
-                        <button onclick="openModal('files/Obatay - Weekly Photo Documentation Report (week 4).pdf', 'Photo Documentation - Week 4')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 4</button>
-                        <button onclick="openModal('files/Obatay - Weekly Photo Documentation Report (week 5).pdf', 'Photo Documentation - Week 5')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 5</button>
-                        <button onclick="openModal('files/Obatay - Weekly Photo Documentation Report (week 6).pdf', 'Photo Documentation - Week 6')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 6</button>
-                        <button onclick="openModal('files/Obatay - Weekly Photo Documentation Report (week 7).pdf', 'Photo Documentation - Week 7')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 7</button>
-                        <button onclick="openModal('files/Obatay - Weekly Photo Documentation Report (week 8).pdf', 'Photo Documentation - Week 8')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 8</button>
+                        <button onclick="openResponsiveModal('files/Obatay - Weekly Photo Documentation Report (week 1).pdf', 'Photo Documentation - Week 1')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 1</button>
+                        <button onclick="openResponsiveModal('files/Obatay - Weekly Photo Documentation Report (week 2).pdf', 'Photo Documentation - Week 2')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 2</button>
+                        <button onclick="openResponsiveModal('files/Obatay - Weekly Photo Documentation Report (week 3).pdf', 'Photo Documentation - Week 3')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 3</button>
+                        <button onclick="openResponsiveModal('files/Obatay - Weekly Photo Documentation Report (week 4).pdf', 'Photo Documentation - Week 4')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 4</button>
+                        <button onclick="openResponsiveModal('files/Obatay - Weekly Photo Documentation Report (week 5).pdf', 'Photo Documentation - Week 5')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 5</button>
+                        <button onclick="openResponsiveModal('files/Obatay - Weekly Photo Documentation Report (week 6).pdf', 'Photo Documentation - Week 6')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 6</button>
+                        <button onclick="openResponsiveModal('files/Obatay - Weekly Photo Documentation Report (week 7).pdf', 'Photo Documentation - Week 7')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 7</button>
+                        <button onclick="openResponsiveModal('files/Obatay - Weekly Photo Documentation Report (week 8).pdf', 'Photo Documentation - Week 8')" class="btn-ripple relative overflow-hidden text-center bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 hover:bg-blue-50 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-indigo-400 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.95] rounded-lg py-2 text-xs font-semibold text-gray-600 dark:text-zinc-400 transition-all shadow-sm focus:outline-none">Week 8</button>
                     </div>
                 </div>
 
@@ -262,15 +290,144 @@
 
     <!-- Scripts -->
     <script>
-        // --- PDF MODAL LOGIC ---
-        function openModal(fileUrl, title) {
+        // --- DYNAMIC 300-HOUR OJT CALCULATOR ---
+        function calculateDynamicHours() {
+            const baseHours = 56;
+            const startDate = new Date('2026-07-20T00:00:00'); 
+            const now = new Date();
+
+            if (now < startDate) return baseHours;
+
+            let totalAdded = 0;
+            let loopDate = new Date(startDate);
+
+            while (loopDate.toDateString() !== now.toDateString() && loopDate < now) {
+                const day = loopDate.getDay();
+                if (day >= 1 && day <= 5) {
+                    totalAdded += 8; 
+                }
+                loopDate.setDate(loopDate.getDate() + 1);
+            }
+
+            const todayDay = now.getDay();
+            if (todayDay >= 1 && todayDay <= 5) {
+                const h = now.getHours();
+                const m = now.getMinutes();
+                const s = now.getSeconds();
+                const exactHour = h + (m / 60) + (s / 3600);
+
+                if (exactHour >= 17) {
+                    totalAdded += 8; 
+                } else if (exactHour >= 13) {
+                    totalAdded += exactHour - 9; 
+                } else if (exactHour >= 12) {
+                    totalAdded += 4; 
+                } else if (exactHour >= 8) {
+                    totalAdded += exactHour - 8; 
+                }
+            }
+
+            return Math.min(baseHours + totalAdded, 300);
+        }
+
+        // --- LIVE SYSTEM CLOCK & MASTER UPDATE LOOP ---
+        function updateDashboard() {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            
+            const currentHour24 = hours; 
+            const currentDay = now.getDay(); 
+            
+            hours = hours % 12;
+            hours = hours ? hours : 12; 
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            
+            document.getElementById('live-clock').innerText = `${hours}:${minutes}:${seconds} ${ampm}`;
+
+            const isWeekday = currentDay >= 1 && currentDay <= 5;
+            const isWorkingHours = currentHour24 >= 8 && currentHour24 < 17;
+
+            const statusText = document.getElementById('status-text');
+            const statusPing = document.getElementById('status-ping');
+            const statusDot = document.getElementById('status-dot');
+
+            if (isWeekday && isWorkingHours) {
+                statusText.innerText = "Status: On-Duty @ Teleperformance";
+                statusPing.classList.remove('hidden');
+                statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-emerald-500";
+            } else {
+                statusText.innerText = "Status: Off-Duty";
+                statusPing.classList.add('hidden'); 
+                statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-gray-400 dark:bg-zinc-600";
+            }
+
+            const currentExactHours = calculateDynamicHours();
+            const percentage = (currentExactHours / 300) * 100;
+            
+            const fill = document.getElementById('progress-fill');
+            if (fill.style.width) {
+                fill.style.width = percentage + '%';
+            }
+            
+            const counterElement = document.getElementById('hours-counter');
+            if (counterElement.getAttribute('data-finished') === "true") {
+                counterElement.innerText = Math.floor(currentExactHours);
+            }
+        }
+        
+        setInterval(updateDashboard, 1000);
+        updateDashboard(); 
+
+        // --- INITIAL PROGRESS BAR ANIMATION ON LOAD ---
+        function animateInitialProgress() {
+            const targetHours = calculateDynamicHours(); 
+            const percentage = (targetHours / 300) * 100;
+            
+            setTimeout(() => {
+                document.getElementById('progress-fill').style.width = percentage + '%';
+            }, 500); 
+
+            const counterElement = document.getElementById('hours-counter');
+            let currentCount = 0;
+            const duration = 1500; 
+            const interval = 20; 
+            const steps = duration / interval;
+            const increment = targetHours / steps;
+
+            const timer = setInterval(() => {
+                currentCount += increment;
+                if (currentCount >= targetHours) {
+                    currentCount = targetHours;
+                    counterElement.setAttribute('data-finished', "true"); 
+                    clearInterval(timer);
+                }
+                counterElement.innerText = Math.floor(currentCount);
+            }, interval);
+        }
+        window.addEventListener('DOMContentLoaded', animateInitialProgress);
+
+        // --- SMART RESPONSIVE PDF MODAL LOGIC ---
+        function openResponsiveModal(fileUrl, title) {
+            // If it's a mobile device (screen width < 768px), open directly in a new tab to trigger native OS PDF reader
+            if (window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                window.open(fileUrl, '_blank');
+                return;
+            }
+
+            // Otherwise, it's a PC/Tablet, open the sleek in-page modal
             const modal = document.getElementById('pdf-modal');
             const iframe = document.getElementById('pdf-iframe');
             const modalTitle = document.getElementById('modal-title');
             const content = document.getElementById('pdf-modal-content');
+            const externalLinkBtn = document.getElementById('modal-external-link');
 
             iframe.src = fileUrl;
             modalTitle.innerText = title;
+            externalLinkBtn.href = fileUrl; // Updates the "Open Fullscreen" button with current file
 
             modal.classList.remove('hidden');
             setTimeout(() => {
